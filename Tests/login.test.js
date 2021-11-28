@@ -1,8 +1,7 @@
 //Перевірка логіну
-//Перевірка логіну
 const playwright = require('playwright');
-const { LoginPO } = require('./PageObjects/FirstPageObject');
-const { BuyPO } = require('./PageObjects/SecondPageObject');
+const { LoginPO } = require('./PageObjects/LoginPageObject');
+const { BuyPO } = require('./PageObjects/BuyPageObject');
 const tests = require("@playwright/test");
 tests.test('Login with data: username:password -> succsses', async({page}) =>
    {
@@ -10,9 +9,9 @@ tests.test('Login with data: username:password -> succsses', async({page}) =>
       await loginPO.Navigate();
       await loginPO.FillAndLogin("username","password");
       const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
-      await delay(2000);
+      await delay(1000);
       tests.expect(await loginPO.Validate()).toBe("Welcome username");
-      tests.expect(await page.screenshot()).toMatchSnapshot('landing.png');
+      tests.expect(await page.screenshot()).toMatchSnapshot('mainPage.png');
   });
 
 //   test('No redirect to main page -> succsses', async() =>
